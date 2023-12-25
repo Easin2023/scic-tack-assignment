@@ -1,13 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../ContextApi/ContextApi";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { LogOut, user } = useContext(AuthContext);
 
-     const navbar = <>
-          <Link to="/" className="btn btn-outline btn-primary btn-sm mr-2">Home</Link>
-          <Link to="/dashboard" className="btn btn-outline btn-primary btn-sm mr-2">Dashboard</Link>
-          <Link to="/login" className="btn btn-outline btn-primary btn-sm">Login</Link>
-     </>
+  const handleSingOut = () => {
+    LogOut()
+      .then((result) => {
+        console.log(result);
+        if (result) {
+          Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const navbar = (
+    <>
+      <Link to="/" className="btn btn-outline btn-primary btn-sm mr-2">
+        Home
+      </Link>
+      {user && (
+        <Link
+          to="/dashboard"
+          className="btn btn-outline btn-primary btn-sm mr-2"
+        >
+          Dashboard
+        </Link>
+      )}
+      <Link to="/login" className="btn btn-outline btn-primary btn-sm">
+        Login
+      </Link>
+    </>
+  );
 
   return (
     <div>
@@ -34,18 +67,20 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-               {navbar}
+              {navbar}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Task<span className="text-blue-500">Harbor</span></a>
+          <a className="btn btn-ghost text-xl">
+            Task<span className="text-blue-500">Harbor</span>
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-               {navbar}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navbar}</ul>
         </div>
         <div className="navbar-end"></div>
-        <div className="dropdown dropdown-end">
+        {
+          user && <>
+          <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
             role="button"
@@ -71,11 +106,13 @@ const Navbar = () => {
             <li>
               <a>Settings</a>
             </li>
-            <li>
+            <li onClick={handleSingOut}>
               <a>Logout</a>
             </li>
           </ul>
         </div>
+          </>
+        }
       </div>
     </div>
   );
