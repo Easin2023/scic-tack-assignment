@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
 import { useContext } from "react";
@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 const Login = () => {
 
   const {login} = useContext(AuthContext);
+  const goTo = useNavigate()
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ const Login = () => {
           text: "You login his been success!",
           icon: "success"
         });
+        goTo("/")
       }
     })
 

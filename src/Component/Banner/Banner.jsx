@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../ContextApi/ContextApi";
 
 const Banner = () => {
+
+  const { user } = useContext(AuthContext);
+
   return (
     <div>
       <div
@@ -13,6 +17,9 @@ const Banner = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-3xl">
+            {
+              user && <h1 className="text-5xl font-bold mb-2">👋{user.displayName}</h1>
+            }
             <h1 className="mb-5 text-5xl font-bold uppercase">WELCOME TO TASK<span className="text-blue-300">Harbor</span></h1>
             <p className="mb-5 text-xl">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda

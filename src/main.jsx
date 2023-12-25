@@ -9,6 +9,11 @@ import Add from "./Component/Add/Add";
 import See from "./Component/See/See";
 import SignUp from "./Component/signUp/SignUp";
 import ContextApi from "./ContextApi/ContextApi";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import TackComplete from "./Component/TackComplete/TackComplete";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +36,10 @@ const router = createBrowserRouter([
         path: "/dashboard/seeTodo",
         element: <See />,
       },
+      {
+        path: "/dashboard/TackComplete",
+        element: <TackComplete/>
+      },
     ],
   },
   {
@@ -39,12 +48,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div className="container mx-auto">
-      <ContextApi>
-        <RouterProvider router={router} />
-      </ContextApi>
+      <QueryClientProvider client={queryClient}>
+        <ContextApi>
+          <RouterProvider router={router} />
+        </ContextApi>
+      </QueryClientProvider>
     </div>
   </React.StrictMode>
 );

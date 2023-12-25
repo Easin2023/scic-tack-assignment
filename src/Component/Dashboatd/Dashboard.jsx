@@ -17,6 +17,9 @@ const Dashboard = () => {
           <Link to="/dashboard/seeTodo">
             <li className="btn w-2/3 mb-2">Todo</li>
           </Link>
+          <Link to="/dashboard/TackComplete">
+            <li className="btn w-2/3 mb-2">complete</li>
+          </Link>
           <Link to="/">
             <li className="btn w-2/3 mb-2">Home</li>
           </Link>
