@@ -14,6 +14,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import TackComplete from "./Component/TackComplete/TackComplete";
+import Private from "./Private/Private";
 
 const router = createBrowserRouter([
   {
@@ -26,19 +27,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <Private><Dashboard /></Private>,
     children: [
       {
         path: "/dashboard/addTodo",
-        element: <Add />,
+        element: <Private><Add /></Private>,
       },
       {
         path: "/dashboard/seeTodo",
-        element: <See />,
+        element: <Private><See /></Private>,
       },
       {
         path: "/dashboard/TackComplete",
-        element: <TackComplete/>
+        element: <Private><TackComplete/></Private>
       },
     ],
   },

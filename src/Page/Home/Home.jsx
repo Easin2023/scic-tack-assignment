@@ -1,8 +1,8 @@
 import Banner from "../../Component/Banner/Banner";
 import Footer from "../../Component/Footer/Footer";
 import Navbar from "../../Component/NavBar/Navbar";
-import AdditionalSection from "../../Component/additional section/AdditionalSection";
 import Sphoncer from "../../Component/spncer/Sphoncer";
+import Extra from '../../Component/Extra/Extra';
 
 const Home = () => {
      return (
@@ -10,7 +10,7 @@ const Home = () => {
                <Navbar/>
                <Banner/>
                <Sphoncer/>
-               <AdditionalSection/>
+               <Extra/>
                <Footer/>
           </div>
      );

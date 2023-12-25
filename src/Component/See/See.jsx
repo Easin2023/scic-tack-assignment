@@ -8,7 +8,7 @@ const See = () => {
   const { user } = useContext(AuthContext);
   const axios = useAxios();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: [user],
     queryFn: () => {
       return axios.get(`/tackData/${user.email}`)
@@ -27,7 +27,7 @@ const See = () => {
   return (
     <div>
       {
-          data?.map(da => <CardData key={da._id} data={da}></CardData>)
+          data?.map(da => <CardData reload={refetch} key={da._id} data={da}></CardData>)
       }
     </div>
   );

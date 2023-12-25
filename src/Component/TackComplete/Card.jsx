@@ -1,11 +1,11 @@
 import Swal from "sweetalert2";
 import useAxios from "../../useAxios/useAxios";
 
-const CardData = ({ data, reload }) => {
+const Card = ({ data, reload }) => {
   const { _id, date, title, priority, Description, tack } = data || {};
   const axios = useAxios();
 
-  const handleUpdate = () => {
+  const handleDelete = (e) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -17,13 +17,12 @@ const CardData = ({ data, reload }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         try {
-          axios.put(`/tackUpdate/${_id}`)
-          .then((putData) => {
-            console.log(putData.data);
-            if (putData.data.message) {
+          axios.delete(`/delete/${_id}`).then((deleteData) => {
+            console.log(deleteData.data);
+            if (deleteData.data.deletedCount > 0) {
               Swal.fire({
-                title: "confirm!",
-                text: "You todo tack confirm!",
+                title: "delete confirm!",
+                text: "You todo tack delete confirm!",
                 icon: "success",
               });
               reload();
@@ -40,7 +39,7 @@ const CardData = ({ data, reload }) => {
 
   return (
     <div>
-      {tack === "pending" && (
+      {tack === "complete" && (
         <div className="bg-slate-200 mt-9 mr-6 rounded-2xl">
           <div className="p-10">
             <h1 className="text-2xl font-medium mb-4">{title}</h1>
@@ -51,8 +50,8 @@ const CardData = ({ data, reload }) => {
                 <p className="text-blue-400">Priority: {priority}</p>
               </div>
               <div>
-                <button onClick={handleUpdate} className="btn btn-sm">
-                  Complete
+                <button onClick={handleDelete} className="btn btn-sm btn-error">
+                  delete
                 </button>
               </div>
             </div>
@@ -63,4 +62,4 @@ const CardData = ({ data, reload }) => {
   );
 };
 
-export default CardData;
+export default Card;

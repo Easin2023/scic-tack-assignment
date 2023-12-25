@@ -24,7 +24,7 @@ const Dashboard = () => {
             <li className="btn w-2/3 mb-2">Home</li>
           </Link>
         </div>
-        <div className="col-span-8">
+        <div className="col-span-8 overflow-y-auto mb-5">
           <Outlet />
         </div>
       </div>
