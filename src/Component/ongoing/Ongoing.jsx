@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { AuthContext } from "../../ContextApi/ContextApi";
-import useAxios from "../../useAxios/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import Card from "./Card";
+import useAxios from "../../useAxios/useAxios";
+import OngoingCard from "./OngoingCard";
 
-const TackComplete = () => {
+const Ongoing = () => {
   const { user } = useContext(AuthContext);
   const axios = useAxios();
 
@@ -22,6 +22,16 @@ const TackComplete = () => {
       </div>
     );
   }
+  if(data.length < 0){
+     return (
+          <div>
+          <img
+            src="https://i.ibb.co/TYWzDzk/PDKD3y-XR9-N-tbf1-Amf-M.gif"
+            alt=""
+          />
+        </div>
+     )
+  }
 
   console.log(data);
 
@@ -37,7 +47,7 @@ const TackComplete = () => {
       ) : (
         <div>
           {data?.map((da) => (
-            <Card reload={refetch} key={da._id} data={da}></Card>
+            <OngoingCard reload={refetch} key={da._id} data={da}></OngoingCard>
           ))}
         </div>
       )}
@@ -45,4 +55,4 @@ const TackComplete = () => {
   );
 };
 
-export default TackComplete;
+export default Ongoing;

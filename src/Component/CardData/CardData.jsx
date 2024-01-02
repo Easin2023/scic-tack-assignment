@@ -17,8 +17,7 @@ const CardData = ({ data, reload }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         try {
-          axios.put(`/tackUpdate/${_id}`)
-          .then((putData) => {
+          axios.put(`/tackUpdate/${_id}`).then((putData) => {
             console.log(putData.data);
             if (putData.data.message) {
               Swal.fire({
@@ -37,6 +36,16 @@ const CardData = ({ data, reload }) => {
       }
     });
   };
+  if (!tack === "pending") {
+    return (
+      <div>
+        <img
+          src="https://i.ibb.co/TYWzDzk/PDKD3y-XR9-N-tbf1-Amf-M.gif"
+          alt=""
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -52,7 +61,7 @@ const CardData = ({ data, reload }) => {
               </div>
               <div>
                 <button onClick={handleUpdate} className="btn btn-sm">
-                  Complete
+                  ongoing
                 </button>
               </div>
             </div>
